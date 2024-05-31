@@ -46,13 +46,14 @@
       </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-      Content
+      {{ebooks}}
+      {{books}}
     </a-layout-content>
   </a-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent, onMounted, reactive, ref, toRef} from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import {LaptopOutlined, NotificationOutlined, UserOutlined} from "@ant-design/icons-vue"; // @ is an alias to /src
 import axios from 'axios';
@@ -65,12 +66,24 @@ export default defineComponent({
   },
   setup() {
     console.log("setup");
-    axios.get("http://127.0.0.1:8880/ebook/list?name=Spring").then(
-        (response) => {
-          console.log(response);
-        }
-    )
-  }
+    const ebooks = ref();
+    const ebooks2 = reactive({books: []})
+
+    onMounted(() => {
+      axios.get("http://127.0.0.1:8880/ebook/list?name=Spring").then(
+          (response) => {
+            const data = response.data;
+            ebooks.value = data.content;
+            ebooks2.books = data.content;
+          }
+      )
+    });
+
+    return {
+      ebooks,
+      books: toRef(ebooks2, "books")
+    }
+  },
 });
 
 </script>
