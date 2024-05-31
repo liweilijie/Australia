@@ -55,6 +55,7 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import {LaptopOutlined, NotificationOutlined, UserOutlined} from "@ant-design/icons-vue"; // @ is an alias to /src
+import axios from 'axios';
 
 export default defineComponent({
   name: 'HomeView',
@@ -62,5 +63,14 @@ export default defineComponent({
     UserOutlined, NotificationOutlined, LaptopOutlined,
     HelloWorld,
   },
+  setup() {
+    console.log("setup");
+    axios.get("http://127.0.0.1:8880/ebook/list?name=Spring").then(
+        (response) => {
+          console.log(response);
+        }
+    )
+  }
 });
+
 </script>
