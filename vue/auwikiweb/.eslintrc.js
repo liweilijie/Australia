@@ -1,3 +1,4 @@
+const {ref} = require("vue");
 module.exports = {
   root: true,
   env: {
@@ -13,6 +14,9 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'vue/no-unused-components': 'off',
+    'vue/multi-word-component-names': 'off',
+    'vue/no-unused-vars': 'off'
   }
 }
