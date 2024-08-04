@@ -1,6 +1,9 @@
 # Australia
 my dream about Australia.
 
+哈哈哈，精心备战了2个多月我的PTE终于考过了，刚刚好雅思6分首考过了，太开心了，如果再给我一个月七炸应该没问题的，不过不重要了，我要求没有那么高。
+接下来全身心投入到java的世界里面啦。
+
 ## java
 
 [install](https://docs.datastax.com/en/jdk-install/doc/jdk-install/installOpenJdkDeb.html):
