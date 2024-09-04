@@ -36,10 +36,10 @@
     </environments>
     <mappers>
         <!--加载sql映射文件-->
-        <mapper resource="com/liw/mapper/UserMapper.xml"/>
+        <!--        <mapper resource="com/liw/mapper/UserMapper.xml"/>-->
 
         <!--Mapper代理方式-->
-        <!--        <package name="com.liw.mapper"/>-->
+        <package name="com.liw.mapper"/>
 
     </mappers>
 
