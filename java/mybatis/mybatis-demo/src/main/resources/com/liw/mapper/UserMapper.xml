@@ -7,7 +7,7 @@
     namespace:名称空间
 -->
 
-<mapper namespace="test">
+<mapper namespace="com.liw.mapper.UserMapper">
 
     <!--statement-->
     <select id="selectAll" resultType="com.liw.pojo.User">
