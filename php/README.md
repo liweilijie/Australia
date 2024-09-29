@@ -2,7 +2,84 @@
 
 `php`,`wordpress`,`nginx`,`thinkphp` 等框架的使用。
 
+## mac install nginx php@7.4
+
+mac install dnsmasq:
+
+```bash
+brew install bash-completion
+brew install nginx
+
+brew install dnsmasq
+vi /usr/local/etc/dnsmasq.conf
+# 内容如下,最后没有换行:
+address=/.dev/127.0.0.1
+listen-address=127.0.0.1
+
+
+# To start dnsmasq now and restart at startup:
+  sudo brew services start dnsmasq
+```
+
+现在你已经有了一个可以工作的 DNS 服务器，你可以在自己的操作系统上配置来使用它。有使用两种方法：
+
+发送所有 DNS 请求到 Dnsmasq
+只发送 .devel 的请求到 Dnsmasq
+第一种方法非常简单，只要在系统偏好中改变你的 DNS 设置——但是可能在 Dnsmasq 配置文件不添加额外的修改的时候并不会生效。
+
+第二种方法显得有点微妙，但并没有非常。大多数类 Unix 的操作系统有叫做 /etc/resolv.conf 的配置文件，用以控制 DNS 查询的执行方式，包括用于 DNS 查询的默认服务器（这是连接到网络或者在系统偏好中修改 DNS 服务器时自动设置的）。
+
+macOS 也允许你通过在 /etc/resolver 文件夹中创建新的配置文件来配置额外的解析器。这个目录可能还不存在于你的系统中，所以你的第一步应该是创建它：
+
+sudo mkdir /etc/resolver
+在此目录创建devel文件，并写人nameserver 127.0.0.1
+
+在这里，devel 是我配置 Dnsmasq 来响应的顶级域名，127.0.0.1 是要使用的服务器的 IP 地址。
+
+一旦你创建了这个文件，macOS 将会自动读取并完成。 ps: 目前现在只发现配置在/etc/resolver下可以，没搞懂配置在/etc/resolv.conf为什么没生效？
+
+至此，你ping任何以.devel结尾的域名就会解析到本地，无论地址是否存在
+
+
+```bash
+Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+nginx will load all files in /usr/local/etc/nginx/servers/.
+
+To start nginx now and restart at login:
+  brew services start nginx
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/nginx/bin/nginx -g daemon\ off\;
+```
+
+### 安装nginx和php
+
+[mac install dnsmasq php nginx](https://gist.github.com/dtomasi/ab76d14338db82ec24a1fc137caff75b)
+
+```bash
+brew tap shivammathur/php
+brew install shivammathur/php/php@7.4
+brew link --force --overwrite php@7.4
+brew services start php@7.4
+echo 'export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"' >> ~/.zshrc # or ~/.bashrc
+echo 'export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"' >> ~/.zshrc # or ~/.bashrc
+
+# 查看占用端口
+sudo lsof -i -n -P | grep php-fpm
+lsof -Pni4 | grep LISTEN | grep php
+```
+
 ## 在 ubuntu 上面安装 wordpress nginx
+
+nginx log: /usr/local/var/log/nginx/
+```bash
+nginx
+nginx -s reload
+nginx -s quit
+```
 
 [Installing NGINX, MySQL, PHP and WordPress on Ubuntu](https://medium.com/@djakkone/installing-nginx-mysql-php-and-wordpress-on-ubuntu-2ccf8beba11f)
 
@@ -93,6 +170,7 @@ ls -l /var/www/html
 file_uploads = On
 max_execution_time = 600
 memory_limit = 512M
+# memory_limit = 2G
 post_max_size = 200M
 max_input_time = 60
 max_input_vars = 4440
