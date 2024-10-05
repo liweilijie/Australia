@@ -19,6 +19,49 @@ launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.kafka.plist
 
 ```bash
 brew install mysql@8.0
+
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+##O=-#     #
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+######################################################################################################################################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/mysql/8.0/manifests/8.0.39_4
+Already downloaded: /Users/liwei/Library/Caches/Homebrew/downloads/b54d34f00e92b9aa9321c4933dccb961cc710f21b8cd971024c4363dea5ac0d5--mysql@8.0-8.0.39_4.bottle_manifest.json
+==> Fetching mysql@8.0
+==> Downloading https://ghcr.io/v2/homebrew/core/mysql/8.0/blobs/sha256:7f7abddd604162d584fba367b67424bf75747c912d38af800ebfb09ee3e48069
+Already downloaded: /Users/liwei/Library/Caches/Homebrew/downloads/b6d85706d5848c93351fa5a45c3079bd44a64919bc70bbb8966af15c10242062--mysql@8.0--8.0.39_4.sonoma.bottle.tar.gz
+==> Pouring mysql@8.0--8.0.39_4.sonoma.bottle.tar.gz
+==> /usr/local/Cellar/mysql@8.0/8.0.39_4/bin/mysqld --initialize-insecure --user=liwei --basedir=/usr/local/Cellar/mysql@8.0/8.0.39_4 --datadir=/usr/local/var/mysql --tmpdir=/tmp
+==> Caveats
+We've installed your MySQL database without a root password. To secure it run:
+    mysql_secure_installation
+
+MySQL is configured to only allow connections from localhost by default
+
+To connect run:
+    mysql -u root
+
+mysql@8.0 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have mysql@8.0 first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/mysql@8.0/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find mysql@8.0 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/mysql@8.0/lib"
+  export CPPFLAGS="-I/usr/local/opt/mysql@8.0/include"
+
+For pkg-config to find mysql@8.0 you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/mysql@8.0/lib/pkgconfig"
+
+To start mysql@8.0 now and restart at login:
+  brew services start mysql@8.0
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/mysql@8.0/bin/mysqld_safe --datadir\=/usr/local/var/mysql
+==> Summary
+🍺  /usr/local/Cellar/mysql@8.0/8.0.39_4: 319 files, 298.4MB
+==> Running `brew cleanup mysql@8.0`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
 ```
 
 ## mac install nginx php@7.4
@@ -28,6 +71,18 @@ mac install dnsmasq:
 ```bash
 brew install bash-completion
 brew install nginx
+
+Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+nginx will load all files in /usr/local/etc/nginx/servers/.
+
+To start nginx now and restart at login:
+  brew services start nginx
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/nginx/bin/nginx -g daemon\ off\;
 
 brew install dnsmasq
 vi /usr/local/etc/dnsmasq.conf
