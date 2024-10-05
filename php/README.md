@@ -2,6 +2,25 @@
 
 `php`,`wordpress`,`nginx`,`thinkphp` 等框架的使用。
 
+```bash
+brew services list # 列出当前所有的服务
+brew services run nginx # 运行服务而不设置开机自启动
+brew services start mysql # 启动服务并注册开机自启动
+brew services stop mysql # 停止，并取消开机自启动
+brew services restart mysql # 重启，并且注册开机启动
+brew services cleanup # 清除uninstall无用的配置
+
+# 关闭服务,并且禁止开机启动
+launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.zookeeper.plist
+launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.kafka.plist
+```
+
+## mac install mysql use brew
+
+```bash
+brew install mysql@8.0
+```
+
 ## mac install nginx php@7.4
 
 mac install dnsmasq:
@@ -32,14 +51,13 @@ listen-address=127.0.0.1
 macOS 也允许你通过在 /etc/resolver 文件夹中创建新的配置文件来配置额外的解析器。这个目录可能还不存在于你的系统中，所以你的第一步应该是创建它：
 
 sudo mkdir /etc/resolver
-在此目录创建devel文件，并写人nameserver 127.0.0.1
+在此目录创建 devel 文件，并写人 nameserver 127.0.0.1
 
 在这里，devel 是我配置 Dnsmasq 来响应的顶级域名，127.0.0.1 是要使用的服务器的 IP 地址。
 
-一旦你创建了这个文件，macOS 将会自动读取并完成。 ps: 目前现在只发现配置在/etc/resolver下可以，没搞懂配置在/etc/resolv.conf为什么没生效？
+一旦你创建了这个文件，macOS 将会自动读取并完成。 ps: 目前现在只发现配置在/etc/resolver 下可以，没搞懂配置在/etc/resolv.conf 为什么没生效？
 
-至此，你ping任何以.devel结尾的域名就会解析到本地，无论地址是否存在
-
+至此，你 ping 任何以.devel 结尾的域名就会解析到本地，无论地址是否存在
 
 ```bash
 Docroot is: /usr/local/var/www
@@ -55,7 +73,7 @@ Or, if you don't want/need a background service you can just run:
   /usr/local/opt/nginx/bin/nginx -g daemon\ off\;
 ```
 
-### 安装nginx和php
+### 安装 nginx 和 php
 
 [mac install dnsmasq php nginx](https://gist.github.com/dtomasi/ab76d14338db82ec24a1fc137caff75b)
 
@@ -75,6 +93,7 @@ lsof -Pni4 | grep LISTEN | grep php
 ## 在 ubuntu 上面安装 wordpress nginx
 
 nginx log: /usr/local/var/log/nginx/
+
 ```bash
 nginx
 nginx -s reload
