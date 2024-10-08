@@ -2,6 +2,22 @@
 
 `php`,`wordpress`,`nginx`,`thinkphp` 等框架的使用。
 
+```bash
+brew services list
+brew services run formula|--all # 启动服务(仅启动不注册)
+brew services start formula|--all # 启动服务，并注册开机启动
+brew services stop formula|--all # 停止服务，并取消注册
+brew services restart formula|--all # 重启服务，并注册
+brew services cleanup # 消除不用的无用的配置
+```
+此处注册开机自启后，会自动创建 .plist 文件，取消开机自启会自动删去该文件
+
+```bash
+# 然后关闭服务，并禁用开机自启动
+launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.zookeeper.plist
+launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.kafka.plist
+```
+
 ## mac install nginx php@7.4
 
 mac install dnsmasq:
