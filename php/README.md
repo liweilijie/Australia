@@ -14,8 +14,65 @@ brew services cleanup # 消除不用的无用的配置
 
 ```bash
 # 然后关闭服务，并禁用开机自启动
+brew services list # 列出当前所有的服务
+brew services run nginx # 运行服务而不设置开机自启动
+brew services start mysql # 启动服务并注册开机自启动
+brew services stop mysql # 停止，并取消开机自启动
+brew services restart mysql # 重启，并且注册开机启动
+brew services cleanup # 清除uninstall无用的配置
+
+# 关闭服务,并且禁止开机启动
 launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.zookeeper.plist
 launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.kafka.plist
+```
+
+## mac install mysql use brew
+
+```bash
+brew install mysql@8.0
+
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+##O=-#     #
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+######################################################################################################################################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/mysql/8.0/manifests/8.0.39_4
+Already downloaded: /Users/liwei/Library/Caches/Homebrew/downloads/b54d34f00e92b9aa9321c4933dccb961cc710f21b8cd971024c4363dea5ac0d5--mysql@8.0-8.0.39_4.bottle_manifest.json
+==> Fetching mysql@8.0
+==> Downloading https://ghcr.io/v2/homebrew/core/mysql/8.0/blobs/sha256:7f7abddd604162d584fba367b67424bf75747c912d38af800ebfb09ee3e48069
+Already downloaded: /Users/liwei/Library/Caches/Homebrew/downloads/b6d85706d5848c93351fa5a45c3079bd44a64919bc70bbb8966af15c10242062--mysql@8.0--8.0.39_4.sonoma.bottle.tar.gz
+==> Pouring mysql@8.0--8.0.39_4.sonoma.bottle.tar.gz
+==> /usr/local/Cellar/mysql@8.0/8.0.39_4/bin/mysqld --initialize-insecure --user=liwei --basedir=/usr/local/Cellar/mysql@8.0/8.0.39_4 --datadir=/usr/local/var/mysql --tmpdir=/tmp
+==> Caveats
+We've installed your MySQL database without a root password. To secure it run:
+    mysql_secure_installation
+
+MySQL is configured to only allow connections from localhost by default
+
+To connect run:
+    mysql -u root
+
+mysql@8.0 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have mysql@8.0 first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/mysql@8.0/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find mysql@8.0 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/mysql@8.0/lib"
+  export CPPFLAGS="-I/usr/local/opt/mysql@8.0/include"
+
+For pkg-config to find mysql@8.0 you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/mysql@8.0/lib/pkgconfig"
+
+To start mysql@8.0 now and restart at login:
+  brew services start mysql@8.0
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/mysql@8.0/bin/mysqld_safe --datadir\=/usr/local/var/mysql
+==> Summary
+🍺  /usr/local/Cellar/mysql@8.0/8.0.39_4: 319 files, 298.4MB
+==> Running `brew cleanup mysql@8.0`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
 ```
 
 ## mac install nginx php@7.4
@@ -25,6 +82,18 @@ mac install dnsmasq:
 ```bash
 brew install bash-completion
 brew install nginx
+
+Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+nginx will load all files in /usr/local/etc/nginx/servers/.
+
+To start nginx now and restart at login:
+  brew services start nginx
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/nginx/bin/nginx -g daemon\ off\;
 
 brew install dnsmasq
 vi /usr/local/etc/dnsmasq.conf
@@ -48,14 +117,13 @@ listen-address=127.0.0.1
 macOS 也允许你通过在 /etc/resolver 文件夹中创建新的配置文件来配置额外的解析器。这个目录可能还不存在于你的系统中，所以你的第一步应该是创建它：
 
 sudo mkdir /etc/resolver
-在此目录创建devel文件，并写人nameserver 127.0.0.1
+在此目录创建 devel 文件，并写人 nameserver 127.0.0.1
 
 在这里，devel 是我配置 Dnsmasq 来响应的顶级域名，127.0.0.1 是要使用的服务器的 IP 地址。
 
-一旦你创建了这个文件，macOS 将会自动读取并完成。 ps: 目前现在只发现配置在/etc/resolver下可以，没搞懂配置在/etc/resolv.conf为什么没生效？
+一旦你创建了这个文件，macOS 将会自动读取并完成。 ps: 目前现在只发现配置在/etc/resolver 下可以，没搞懂配置在/etc/resolv.conf 为什么没生效？
 
-至此，你ping任何以.devel结尾的域名就会解析到本地，无论地址是否存在
-
+至此，你 ping 任何以.devel 结尾的域名就会解析到本地，无论地址是否存在
 
 ```bash
 Docroot is: /usr/local/var/www
@@ -71,7 +139,7 @@ Or, if you don't want/need a background service you can just run:
   /usr/local/opt/nginx/bin/nginx -g daemon\ off\;
 ```
 
-### 安装nginx和php
+### 安装 nginx 和 php
 
 [mac install dnsmasq php nginx](https://gist.github.com/dtomasi/ab76d14338db82ec24a1fc137caff75b)
 
@@ -91,6 +159,7 @@ lsof -Pni4 | grep LISTEN | grep php
 ## 在 ubuntu 上面安装 wordpress nginx
 
 nginx log: /usr/local/var/log/nginx/
+
 ```bash
 nginx
 nginx -s reload
