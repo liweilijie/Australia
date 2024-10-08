@@ -20,4 +20,5 @@ it's never too late to learn.
 - Ask me if & Comprehension
 - 不停的造句，造句和短语最重要
 
-![绿红皮书](images/practise.png)
+<!-- ![绿红皮书](images/practise.png) -->
+<img src="images/practise.png" height="240px" width="160px" />
