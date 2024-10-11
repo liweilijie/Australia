@@ -251,6 +251,58 @@ max_input_vars = 4440
 upload_max_filesize = 200M
 ```
 
+配置调试是 WordPress 主题开发的重要部分。WordPress 提供了许多常量来支持您的调试工作。其中包括：
+
+**WP_DEBUG**
+
+debug 修改最终结果是：
+
+```php
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ); // 5.2 and later
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', true );
+
+/* That's all, stop editing! Happy publishing. */
+define( 'WP_MEMORY_LIMIT', '512M' );
+```
+
+PHP 常量 WP_DEBUG 用于触发 WordPress 安装上的内置“DEBUG”模式。这允许您查看主题中的错误。要启用它，请执行以下操作：
+
+1. 打开 wp-config.php 文件
+
+2. 把
+
+```php
+define( 'WP_DEBUG', false );
+```
+
+修改为
+
+```php
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ); // 5.2 and later
+define( 'WP_DEBUG', true );
+```
+
+虽然在 wp-config.php 文件中通常设置为“false”，但 WordPress 的开发版本（alpha 和 beta 版），WP_DEBUG 默认是设置为“true”。
+WP_DEBUG_DISPLAY 和 WP_DEBUG_LOG
+
+WP_DEBUG_LOG 和 WP_DEBUG_DISPLAY 是 WP_DEBUG 的扩展 PHP 常量。
+
+WP_DEBUG_LOG 与 WP_DEBUG 一起使用，将所有错误信息记录到 WordPress /wp-content/目录下的 debug.log。要启用这个功能，请在你的 wp-config.php 文件中把 WP_DEBUG_LOG 设置为 true。
+
+```php
+define( 'WP_DEBUG_LOG', true );
+```
+
+WP_DEBUG_DISPLAY 是用来控制调试信息是否显示在你的主题页面的 HTML 中。要在错误发生时在屏幕上显示错误信息，请在你的 wp-config.php 文件中把这个设置配置为 "true"。
+
+```php
+define( 'WP_DEBUG_DISPLAY', true );
+```
+
+启用 WP_DEBUG 和 WP_DEBUG_DISPLAY 后，错误信息将显示在您网站页面的顶部。
+
 接下来可以打开网页安装了。
 
 **注意事项**：
