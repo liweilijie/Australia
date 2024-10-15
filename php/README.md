@@ -3,6 +3,17 @@
 `php`,`wordpress`,`nginx`,`thinkphp` 等框架的使用。
 
 ```bash
+brew services list
+brew services run formula|--all # 启动服务(仅启动不注册)
+brew services start formula|--all # 启动服务，并注册开机启动
+brew services stop formula|--all # 停止服务，并取消注册
+brew services restart formula|--all # 重启服务，并注册
+brew services cleanup # 消除不用的无用的配置
+```
+此处注册开机自启后，会自动创建 .plist 文件，取消开机自启会自动删去该文件
+
+```bash
+# 然后关闭服务，并禁用开机自启动
 brew services list # 列出当前所有的服务
 brew services run nginx # 运行服务而不设置开机自启动
 brew services start mysql # 启动服务并注册开机自启动
