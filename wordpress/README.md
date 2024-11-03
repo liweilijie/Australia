@@ -96,3 +96,8 @@ flush privileges;
 -   install wpsmtp plugin -> Brevo -> Configration
 -   "Create A Listing" Page extend "Dashboard Creating List" template
 -   Houzez -> Field Name for property details add field.
+
+
+## icons 下载
+
+[https://fontawesome.com/search](https://fontawesome.com/search)
