@@ -80,12 +80,12 @@ use file-level PHPDoc DocBlock better.
 [filter 常用](https://developer.wordpress.org/apis/hooks/filter-reference/)
 
 ```php
-liw_filter_fun($value) 
+function liw_filter_fun($value) 
 {
     return $value . "liw";
 }
 
-liw_filter_fun_add_time($value)
+function liw_filter_fun_add_time($value)
 {
     return date("Y-m-d H:i:s").$value
 }
