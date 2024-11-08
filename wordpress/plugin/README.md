@@ -146,4 +146,45 @@ function liw_create_submenu_add_poo_func() { ?> <h2>submenu add poo</h2> <?php }
 
 ## widgets 小工具创建和使用
 
-在外观里面有widgets，可以排列组合成为自己想要的。
+在外观里面有**widgets**，可以排列组合成为自己想要的。
+
+[widgets api](https://codex.wordpress.org/Widgets_API)
+
+## meta 元数据创建
+
+## 插件页面
+
+页面的css样式，标题，table, form，button等功能样式，以及读取值的功能。
+
+尤其是操作数据库，可以自己的方式 也 可以使用wordpress提供的API接口进行操作。
+
+[database](https://github.com/bestony/EasyWordPressBook/blob/master/opt/wpdb.md)
+
+API:
+
+`options.php`专程用来处理提交表单过来的信息使用的。
+
+## 为自己的插件创建类
+
+## 选项添加到现有的管理页面中
+
+## 调用 ajax 
+
+`wp_enqueque_script`
+
+## locale 本地化处理
+
+## 插件的权限控制
+
+`current_user_can`
+`get_current_screen`
+
+## 短标签
+
+`add_shortcode`
+`do_shortcode`
+
+## 自定义文章类型
+
+
+
