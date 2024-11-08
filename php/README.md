@@ -351,7 +351,18 @@ download envato market plugin: [envato market](https://www.envato.com/lp/market-
     2. 在`http{}`段中加入`client_max_body_size 200m;` 200m 为允许最大上传的大小。
     3. 保存后重启**nginx**，问题解决。
 
+## composer
+
+[composer install](https://getcomposer.org/download/)
+```bash
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+mv composer.phar /usr/local/bin/composer
+```
+
 ## reference
 
 -   [wpresidence server requirements](https://help.wpresidence.net/article/theme-wordpress-server-requirements/)
 -   [woocommerce server recommendations](https://woocommerce.com/document/server-requirements/)
+
