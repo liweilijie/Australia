@@ -1,4 +1,31 @@
-# wordpress
+# nginx fastCGI php-fpm关系
+`nginx.conf`中配置**fastCGI**, **php**需要安装`php-fpm`扩展并启动`php-fpm`守护进程，**nginx**才能解析**php**脚本。那么背后的原理是什么呢？
+
+- fastCGI: 这是一个能用的接口标准，是**http**服务器(`nginx`, `apache`)和动态语言(php)之间的通信接口。记住**fastCGI**只是一个接口。 fastCGI的优点：采用C/S结构，可以**将http服务器和动态脚本解析服务器分离(二者可以部署在不同的服务器上)**，让http服务器专一处理静态请求和转发动态请求到脚本解析服务器；脚本解析服务器则专一处理动态脚本的请求。
+- nginx+fastCGI: nginx不支持对外部程序的直接调用或者解析，必须通过fastCGI进行调用。nginx收到CGI请求之后，fastCGI接口在脚本解析到服务器上，启动一个或者多个守护进程对动态脚本进行解析。
+- php-fpm: fastCGI进程管理器/引擎。即对动态脚本进行实际解析的守护进程，由fastCGI启动。这里，php-fpm就是支持解析php的一个fastCGI进程管理器。
+
+总结：
+> fastCGI是nginx和php之间的一个通信接口，该接口实际处理过程通过启动php-fpm进程来解析php脚本，即php-fpm相当于一个动态应用服务器，从而实现nginx动态解析php。因此，如果nginx服务器需要支持php解析，需要在nginx.conf中增加php的配置：将php脚本转发到fastCGI进程监听的IP地址和端口（php-fpm.conf中指定）。同时，php安装的时候，需要开启支持fastCGI选项，并且编译安装php-fpm补丁/扩展，同时，需要启动php-fpm进程，才可以解析nginx通过fastCGI转发过来的php脚本。
+
+
+![nginx php fpm](images/nginx_phpfpm.png)
+
+
+```bash
+# 启动mbp上面的services
+brew services run php@7.4
+brew services run nginx
+brew services run mysql
+
+# nginx的配置
+vi /usr/local/etc/nginx/servers/wp.conf
+
+# php 配置
+vi /usr/local/etc/php/7.4/php.ini
+```
+
+## wordpress
 
 `php`,`wordpress`,`nginx`,`thinkphp` 等框架的使用。
 
@@ -366,3 +393,8 @@ mv composer.phar /usr/local/bin/composer
 -   [wpresidence server requirements](https://help.wpresidence.net/article/theme-wordpress-server-requirements/)
 -   [woocommerce server recommendations](https://woocommerce.com/document/server-requirements/)
 
+## 常用命令
+
+```bash
+journalctl -u ddclient.service
+```

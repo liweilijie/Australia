@@ -7,3 +7,9 @@ my dream about Australia.
 
 - 10月份争取学习完新概念英语1册
 - 并且将房屋网站70%功能完成，使用wordpress的模板来做，自己写一些插件即可。
+
+## I am here.
+
+人已经在 **Melbourne** 了，接下来就是将这个过程没日没夜的做好。
+
+`php language` -> wordpress framework -> plugin and theme
